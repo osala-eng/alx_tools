@@ -1,7 +1,6 @@
 #!/bin/bash
 # Installer
-
-if [ "(id -u)" != "0" ]; then
+if [ "$(id -u)" != "0" ]; then
 	echo "You are not root, terminating program.."
 	exit 1
 fi
