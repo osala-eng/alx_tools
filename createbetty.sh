@@ -7,7 +7,7 @@ if [ "$#" = "0" ]; then
 	exit 1
 fi
 
-ARGUMENT_INPUT=""
+ARGUMENT_INPUT=$1
 ARGUMENT_BR=" "
 TEMPLATE_PATH="/opt/alx"
 TEMPLATE_FILE="main"
@@ -16,10 +16,6 @@ if [ ! -d "${TEMPLATE_PATH}" ]; then
 	echo -e "Sorry template not found.."
 	exit 1
 fi
-
-for arg in "$@"; do
-	ARGUMENT_INPUT="${ARGUMENT_INPUT}${ARGUMENT_BR}${arg}"
-done
 
 # fetch template
 
