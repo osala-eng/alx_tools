@@ -10,7 +10,8 @@ fi
 GCC_TOOL="agcc"
 CLEAN_BETTY="cleanbetty"
 CREATE_BETTY="createbetty"
-FILE_TEMPLATE="makefiles/template"
+SOURCE_DIR="makefiles"
+TEMPLATE_FILE="template"
 DATA_FILE="main"
 
 APP_PATH="/opt/alx"
@@ -24,14 +25,14 @@ mkdir -p "${APP_PATH}"
 cp "${GCC_TOOL}.sh" "${APP_PATH}/${GCC_TOOL}"
 cp "${CLEAN_BETTY}.sh" "${APP_PATH}/${CLEAN_BETTY}"
 cp "${CREATE_BETTY}.sh" "${APP_PATH}/${CREATE_BETTY}"
-cp "${FILE_TEMPLATE}.c" "${APP_PATH}/${DATA_FILE}.c"
+cp "${SOURCE_DIR}/${TEMPLATE_FILE}.c" "${APP_PATH}/${DATA_FILE}.c"
 
 chmod a+x "${APP_PATH}/${GCC_TOOL}"
 chmod a+x "${APP_PATH}/${CLEAN_BETTY}"
 chmod a+x "${APP_PATH}/${CREATE_BETTY}"
 
-ln -s "${APP_PATH}/${GCC_TOOL}" "${BIN_PATH}/${GCC_TOOL}"
-ln -s "${APP_PATH}/${CLEAN_BETTY}" "${BIN_PATH}/${CLEAN_BETTY}"
-ln -s "${APP_PATH}/${CREATE_BETTY}" "${BIN_PATH}/${CREATE_BETTY}"
+ln -s -f "${APP_PATH}/${GCC_TOOL}" "${BIN_PATH}/${GCC_TOOL}"
+ln -s -f "${APP_PATH}/${CLEAN_BETTY}" "${BIN_PATH}/${CLEAN_BETTY}"
+ln -s -f "${APP_PATH}/${CREATE_BETTY}" "${BIN_PATH}/${CREATE_BETTY}"
 
 echo -e "All done enjoy :)"
