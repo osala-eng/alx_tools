@@ -7,6 +7,6 @@ if [ "$#" -eq 0 ]; then
 	exit 1
 fi
 
-DATA_FILE=$1
+sed -i 's/[ \t]*$//' $1
 
-sed -i 's/[ \t]*$//' "${DATA_FILE}"
+echo -e "Removed all trailing whitespaces.."
