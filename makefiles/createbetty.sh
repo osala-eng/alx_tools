@@ -9,7 +9,7 @@ fi
 
 ARGUMENT_INPUT=""
 ARGUMENT_BR=" "
-TEMPLATE_PATH="/opt/betty"
+TEMPLATE_PATH="/opt/alx"
 TEMPLATE_FILE="main"
 
 if [ ! -d "${TEMPLATE_PATH}" ]; then
