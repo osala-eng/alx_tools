@@ -31,4 +31,4 @@ sed -i 's/for(/for (/g' $1
 sed -i 's/while(/while (/g' $1
 
 
-echo -e "Removed all trailing whitespaces.."
+echo -e "Removed all trailing whitespaces, enjoy :)"
