@@ -2,7 +2,7 @@
 
 ### Installation
 
-Run script `sudo install.sh` to install `agcc`, `createbetty` and `cleanbetty` on your computer.
+Run script `sudo ./install.sh` to install `agcc`, `createbetty` and `cleanbetty` on your computer.
 
 ## agcc
 
