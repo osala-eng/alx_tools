@@ -32,7 +32,9 @@ sed -i 's/while(/while (/g' $1
 
 sed -i 's/  \+ /\t/g' $1
 
-echo -e "=========================================="
+echo -e ""
+
+echo -e "================cleanbetty================"
 
 echo -e "Removed all trailing whitespaces, enjoy :)"
 
