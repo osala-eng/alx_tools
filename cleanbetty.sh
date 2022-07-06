@@ -38,4 +38,4 @@ echo -e "================cleanbetty================"
 
 echo -e "Removed all trailing whitespaces, enjoy :)"
 
-echo -e ""
+echo -e "$1"
