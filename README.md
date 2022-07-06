@@ -1,4 +1,4 @@
-# Simple tools
+# Simple tools for alx SE course
 
 ### Installation
 
@@ -57,7 +57,7 @@ cleanbetty file
 
 To install run:
 ```bash
-sudo install.sh
+sudo ./install.sh
 ```
 
 ## Usage
