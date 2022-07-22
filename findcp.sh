@@ -5,12 +5,11 @@ if [ "$#" -eq 0 ]; then
 	exit 1
 fi
 
-
-ARG_BR=" "
-ARG_LIST=""
+# collect args
 
 for arg in "$@"; do
-	cp "`find ../ -name ${arg} | sed -n '1p'`" .
+	__line="`echo $arg | sed -e 's/.o/.c/g'`"
+	cp "`find ../ -name ${__line} | sed -n '1p'`" .
 done
 
 clear && ls

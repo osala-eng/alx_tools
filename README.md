@@ -68,6 +68,18 @@ The sytanx to use the tool is:
 agcc filename [OPTIONS]
 ```
 
+# Find and copy from parent
+
+copy and paste the following link in terminal
+
+```bash
+curl https://raw.githubusercontent.com/osala-eng/alx_tools/master/findcp.sh -o findcp && chmod a+x findcp
+```
+
+## Usage
+
+Run `./findcp [filename]`
+
 ## Repo
 https://github.com/osala-eng/alx_tools
 
