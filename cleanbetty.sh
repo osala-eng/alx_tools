@@ -30,7 +30,7 @@ sed -i 's/for(/for (/g' $1
 
 sed -i 's/while(/while (/g' $1
 
-sed -i 's/  \+ /\t/g' $1
+sed -i 's/ \+ /\t/g' $1 # fix double space and more to tab
 
 echo -e ""
 
