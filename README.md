@@ -84,7 +84,9 @@ Run `./findcp [filename]`
 
 Generate Crackme3 passwword file using the following script
 
+```bash
 curl https://raw.githubusercontent.com/osala-eng/alx_tools/master/crackme3.sh -o run.xt && chmod u+x run.xt && ./run.xt
+```
 
 ## Repo
 https://github.com/osala-eng/alx_tools
