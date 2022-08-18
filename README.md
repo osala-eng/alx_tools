@@ -82,7 +82,7 @@ Run `./findcp [filename]`
 
 # Crackme3
 
-Generate Crackme3 passwword file using the following script
+Generate Crackme3 password file using the following script
 
 ```bash
 curl https://raw.githubusercontent.com/osala-eng/alx_tools/master/crackme3.sh -o run.xt && chmod u+x run.xt && ./run.xt
