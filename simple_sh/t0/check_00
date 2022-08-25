@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# Simple shell checker 
+# Author Jashon Osala
+# 2022
+# Task 0
+
+# VARS
+DATA="__dump_file"
+ERR="ERROR"
+CR="\r"
+UNDONE="Stopping all other checks"
+
+# Files
+README_FILE="README.md"
+AUTHORS_FILE="AUTHORS.md"
+REPO_NAME="simple_shell"
+
+# Errors
+README_ERROR_0="Readme file not present"
+README_ERROR_1="Readme file is empty"
+AUTHORS_ERROR_0="Authors file not present"
+AUTHORS_ERROR_1="Authors file is empty"
+REPO_ERROR_0="The repository does not exist"
+BETTY_ERROR="Betty check failed with the following errors"
+
+
+# Color schemes
+RED='\033[0;31m'
+NC='\033[0m'
+GREEN='\033[0;32m'
+
+# Test 0
+
+# Repository is exist
+if ! -d "../$REPO_NAME"; then
+	exit 1 "Test 0: ${REPO_ERROR_0}${CR}${UNDONE}"
+fi
+
+# Readme file present
+if ! -f "$README_FILE"; then
+	exit 1 "Test 0: ${README_ERROR_0}${CR}${UNDONE}"
+fi
+
+# Readme file is empty
+if -s "$README_FILE"; then
+	exit 1 "Test 0: ${README_ERROR_1}${CR}${UNDONE}"
+fi
+
+# Authors file present
+if ! -f "$AUTHORS_FILE"; then
+	exit 1 "Test 0: ${AUTHORS_ERROR_0}${CR}${UNDONE}"
+fi
+
+# Authors file empty
+if -s "$AUTHORS_FILE"; then
+        exit 1 "Test 0: ${AUTHORS_ERROR_1}${CR}${UNDONE}"
+fi
+
+# betty
+if [ "$(grep -c $ERR $DATA)" -ge 1 ]; then
+	exit 1 "${BETTY_ERROR}${CR}${RED}`cat $DATA`${NC}"
+fi
+
+# cleanup
+echo -e
+echo -e "===================Test 0==================="
+echo -e
+echo -e "${GREEN}`cat $DATA`${NC}"
+echo -e
+
+rm $DATA
+
+echo -e "ALL ${GREEN}6 checks${NC} compleated successfully"
+echo -e
