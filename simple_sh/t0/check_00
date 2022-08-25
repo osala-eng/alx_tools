@@ -63,6 +63,9 @@ if [ ! -s "$AUTHORS_FILE" ]; then
 fi
 
 # betty
+
+./betty *.c *.h > $DATA
+
 if [ "$(grep -c $ERR $DATA)" -ge 1 ]; then
 	echo -e "${BETTY_ERROR}${CR}${RED}`cat $DATA`${NC}" 1>&2
 	exit 64
