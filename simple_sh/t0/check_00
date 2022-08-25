@@ -33,33 +33,39 @@ GREEN='\033[0;32m'
 # Test 0
 
 # Repository is exist
-if ! -d "../$REPO_NAME"; then
-	exit 1 "Test 0: ${REPO_ERROR_0}${CR}${UNDONE}"
+if [ ! -d "../$REPO_NAME" ]; then
+	echo -e "Test 0: ${REPO_ERROR_0}${CR}${UNDONE}" 1>&2
+	exit 64
 fi
 
 # Readme file present
-if ! -f "$README_FILE"; then
-	exit 1 "Test 0: ${README_ERROR_0}${CR}${UNDONE}"
+if [ ! -f "$README_FILE" ]; then
+	echo -e "Test 0: ${README_ERROR_0}${CR}${UNDONE}" 1>&2
+	exit 64
 fi
 
 # Readme file is empty
-if -s "$README_FILE"; then
-	exit 1 "Test 0: ${README_ERROR_1}${CR}${UNDONE}"
+if [ -s "$README_FILE" ]; then
+	echo -e "Test 0: ${README_ERROR_1}${CR}${UNDONE}" 1>&2
+	exit 64
 fi
 
 # Authors file present
-if ! -f "$AUTHORS_FILE"; then
-	exit 1 "Test 0: ${AUTHORS_ERROR_0}${CR}${UNDONE}"
+if [ ! -f "$AUTHORS_FILE" ]; then
+	echo -e "Test 0: ${AUTHORS_ERROR_0}${CR}${UNDONE}" 1>&2
+	exit 64
 fi
 
 # Authors file empty
-if -s "$AUTHORS_FILE"; then
-        exit 1 "Test 0: ${AUTHORS_ERROR_1}${CR}${UNDONE}"
+if [ -s "$AUTHORS_FILE" ]; then
+        echo -e "Test 0: ${AUTHORS_ERROR_1}${CR}${UNDONE}" 1>&2
+	exit 64
 fi
 
 # betty
 if [ "$(grep -c $ERR $DATA)" -ge 1 ]; then
-	exit 1 "${BETTY_ERROR}${CR}${RED}`cat $DATA`${NC}"
+	echo -e "${BETTY_ERROR}${CR}${RED}`cat $DATA`${NC}" 1>&2
+	exit 64
 fi
 
 # cleanup
