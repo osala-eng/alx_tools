@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Simple shell checker 
+# Author Jashon Osala
+# 2022
+
+TEST_DOC="local_check"
+TOOL_LOC="suites"
+
+# checker addresses
+
+address_00="https://raw.githubusercontent.com/osala-eng/alx_tools/master/simple_sh/t0/check_00.tar.gz"
+
+file_00="check_00.tar.gz"
+
+if [ ! -f $TEST_DOC ]; then
+	echo -e "No checks to run" 1>&2
+	exit 64 
+fi
+
+call_check () {
+	case "$1" in
+		"CHECK_00") echo -e "Task 0: Checks"
+			curl $address_00 > $file_00
+			mkdir -p $TOOL_LOC
+			tar xfz $file_00 -C "${TOOL_LOC}/"
+			./${TOOL_LOC}/check_00
+			;;
+		*)
+			echo -e "Specified test $1 not defined" 1>&2
+			exit 64
+			;;
+	esac
+}
+
+while read line; do
+	call_check $line
+done < $TEST_DOC
