@@ -66,6 +66,12 @@ fi
 
 ./suites/betty *.c *.h > $DATA
 
+if [ ! -f "$DATA" ]; then
+	echo -e "Test 0: Betty checker failed to launch${CR}${UNDONE}" 1>&2
+	exit 64
+fi
+
+
 if [ "$(grep -c $ERR $DATA)" -ge 1 ]; then
 	echo -e "${BETTY_ERROR}${CR}${RED}`cat $DATA`${NC}" 1>&2
 	exit 64
