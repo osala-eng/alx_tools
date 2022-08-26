@@ -37,52 +37,59 @@ run_checker () {
 	for ((i=$(($1)); i <= $(($2)); i=$(($i + 1)))); do
 		${HOME_DIR}/${TOOL_DIR}/mark $i $3
 	done
-	printf "$CR"
 }
 
 # Test 0
+echo -e
+echo -e "===================Test 0==================="
+echo -e
+echo -e
 
 # Repository is exist
 if [ ! -d "../$REPO_NAME" ]; then
+	run_checker 0 6 0
 	echo -e "Test 0: ${REPO_ERROR_0}${CR}${UNDONE}" 1>&2
 	echo -e
-	run_checker 0 6 0
 	exit 64
 fi
 
 # Readme file present
 if [ ! -f "$README_FILE" ]; then
-	echo -e "Test 0: ${README_ERROR_0}${CR}${UNDONE}" 1>&2
-	echo -e
 	run_checker 0 0 1
         run_checker 1 6 0
+	echo -e
+	echo -e "Test 0: ${README_ERROR_0}${CR}${UNDONE}" 1>&2
+	echo -e
 	exit 64
 fi
 
 # Readme file is empty
 if [ ! -s "$README_FILE" ]; then
-	echo -e "Test 0: ${README_ERROR_1}${CR}${UNDONE}" 1>&2
-	echo -e
         run_checker 0 1 1
         run_checker 2 6 0
+	echo -e
+	echo -e "Test 0: ${README_ERROR_1}${CR}${UNDONE}" 1>&2
+	echo -e
 	exit 64
 fi
 
 # Authors file present
 if [ ! -f "$AUTHORS_FILE" ]; then
-	echo -e "Test 0: ${AUTHORS_ERROR_0}${CR}${UNDONE}" 1>&2
-	echo -e
         run_checker 0 2 1
         run_checker 3 6 0
+	echo -e
+	echo -e "Test 0: ${AUTHORS_ERROR_0}${CR}${UNDONE}" 1>&2
+	echo -e
 	exit 64
 fi
 
 # Authors file empty
 if [ ! -s "$AUTHORS_FILE" ]; then
-        echo -e "Test 0: ${AUTHORS_ERROR_1}${CR}${UNDONE}" 1>&2
-	echo -e
         run_checker 0 3 1
         run_checker 4 6 0
+       	echo -e
+	echo -e "Test 0: ${AUTHORS_ERROR_1}${CR}${UNDONE}" 1>&2
+	echo -e
 	exit 64
 fi
 
@@ -91,29 +98,28 @@ fi
 ./suites/betty *.c *.h > $DATA
 
 if [ ! -f "$DATA" ]; then
-	echo -e "Test 0: Betty checker failed to launch${CR}${UNDONE}" 1>&2
-	echo -e
         run_checker 0 4 1
         run_checker 5 6 0
+	echo -e
+	echo -e "Test 0: Betty checker failed to launch${CR}${UNDONE}" 1>&2
+	echo -e
 	exit 64
 fi
 
 
 if [ "$(grep -c $ERR $DATA)" -ge 1 ]; then
-	echo -e "${BETTY_ERROR}${CR}${RED}`cat $DATA`${NC}" 1>&2
 	run_checker 0 5 1
 	run_checker 6 6 0
+	echo -e
+	echo -e "${BETTY_ERROR}${CR}${RED}`cat $DATA`${NC}" 1>&2
 	exit 64
 fi
 
 # cleanup
 echo -e
-echo -e "===================Test 0==================="
 echo -e
 run_checker 0 6 1
 echo -e
-echo -e
-echo -e "${GREEN}`cat $DATA`${NC}"
 echo -e
 
 rm $DATA
