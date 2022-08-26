@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Simple check marker
+# Author Jashon Osala
+# 2022
+
+# Usage 
+# ./mark Num_of_check Pass_or_Fail
+
+NC='\033[0m'
+COL_S=('\033[0;31m' '\033[0;32m')
+CHECK_M=('\u274c' '\u2705')
+
+print_checks () {
+	for (( n=$(($1)); n <= $(($2)); )); do
+	
+		if [ $((n)) -eq $(($2)) ]; then
+			printf "${COL_S[$4]}$3 Check $n \n$NC"
+
+
+		elif [ $((n % 4)) -eq 0 ]; then
+			echo -e
+			printf "${COL_S[$4]}$3 Check $n \t$NC"
+		
+		else
+			printf "${COL_S[$4]}$3 Check $n \t$NC"
+		fi
+
+		n=$(($n + 1))
+	done
+}
+
+if [ $# -ne 2 ]; then
+	echo -e "Argument overload\nUsage example\n./mark 1 0" 1>&2
+	exit 64
+fi
+
+print_checks $1 $1 ${CHECK_M[$2]} $2
+
+
