@@ -116,14 +116,9 @@ if [ "$(grep -c $ERR $DATA)" -ge 1 ]; then
 fi
 
 # cleanup
-echo -e
-echo -e
 run_checker 0 6 1
-echo -e
-echo -e
 
 rm $DATA
 echo -e
-
 echo -e "ALL ${GREEN}checks${NC} compleated successfully"
 echo -e
