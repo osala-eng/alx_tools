@@ -21,7 +21,7 @@ fi
 call_check () {
 	case "$1" in
 		"CHECK_00") echo -e "Task 0: Checks"
-			curl $address_00 > $file_00
+			curl -s $address_00 > $file_00
 			mkdir -p $TOOL_LOC
 			tar xfz $file_00 -C "${TOOL_LOC}/"
 			./${TOOL_LOC}/check_00
