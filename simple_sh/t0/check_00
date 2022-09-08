@@ -13,7 +13,7 @@ UNDONE="Stopping all other checks"
 
 # Files
 README_FILE="README.md"
-AUTHORS_FILE="AUTHORS.md"
+AUTHORS_FILE="AUTHORS"
 REPO_NAME="simple_shell"
 
 # Errors
