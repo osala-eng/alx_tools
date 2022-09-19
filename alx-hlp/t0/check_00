@@ -1,0 +1,107 @@
+#!/bin/bash
+
+# Auto Betty Checker
+# Author Jashon Osala
+# 2022
+# Betty linter
+
+# VARS
+DATA="__dump_file"
+ERR={"ERROR" "WARNING"}
+CR="\n"
+UNDONE="Stopping all other checks"
+
+# Files
+README_FILE="README.md"
+REPO_NAME="alx-higher_level_programming"
+
+# Errors
+README_ERROR_0="Readme file not present"
+README_ERROR_1="Readme file is empty"
+REPO_ERROR_0="The repository does not exist"
+BETTY_ERROR="Betty check failed with the following errors"
+
+
+# Color schemes
+RED='\033[0;31m'
+NC='\033[0m'
+GREEN='\033[0;32m'
+
+HOME_DIR="."
+TOOL_DIR="suites"
+
+run_checker () {
+	for ((i=$(($1)); i <= $(($2)); i=$(($i + 1)))); do
+		${HOME_DIR}/${TOOL_DIR}/mark $i $3
+	done
+}
+
+# Readme script
+readme_file() {
+# Readme file present
+if [ ! -f "$1" ]; then
+	echo -e
+	echo -e "Test 0: ${README_ERROR_0}${CR}${UNDONE}" 1>&2
+	echo -e
+	exit 64
+fi
+
+# Readme file is empty
+if [ ! -s "$1" ]; then
+	echo -e
+	echo -e "Test 0: ${README_ERROR_1}${CR}${UNDONE}" 1>&2
+	echo -e
+	exit 64
+fi
+}
+
+# Test 0
+echo -e
+echo -e "===================Test 0==================="
+echo -e
+echo -e
+
+# Repository is exist
+if [ ! -d "../$REPO_NAME" ]; then
+	echo -e "Test 0: ${REPO_ERROR_0}${CR}${UNDONE}" 1>&2
+	echo -e
+	exit 64
+fi
+
+# Root readme
+readme_file $README_FILE
+
+for d in */; do
+	readme_file "${d}/${README_FILE}"
+
+	# betty
+	
+	if [ -f $d/*.c ]; then
+		./suites/betty $d/*.c >> $DATA
+	fi
+	if [ -f $d/*.h ]; then
+		./suites/betty $d/*.c >> $DATA
+	fi
+done
+
+if [ ! -f "$DATA" ]; then
+	echo -e
+	echo -e "Test 0: Betty checker failed to launch${CR}${UNDONE}" 1>&2
+	echo -e
+	exit 64
+fi
+
+for i in $ERR; do
+	if [ "$(grep -c $i $DATA)" -ge 1 ]; then
+		echo -e
+		echo -e "${BETTY_ERROR}${CR}${RED}`cat $DATA`${NC}" 1>&2
+		exit 64
+	fi
+done
+
+# cleanup
+
+rm $DATA
+echo -e
+echo -e "ALL ${GREEN}checks${NC} compleated successfully"
+echo -e

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Auto Betty checker 
+# Author Jashon Osala
+# 2022
+
+TOOL_LOC="suites"
+
+# checker addresses
+
+address_00="https://raw.githubusercontent.com/osala-eng/alx_tools/master/alx-hlp/t0/file.tar.gz"
+
+file_00="file.tar.gz"
+
+call_check () {
+	echo -e $1
+	curl -s $address_00 > $file_00
+	mkdir -p $TOOL_LOC
+	tar xfz $file_00 -C "${TOOL_LOC}/"
+	./${TOOL_LOC}/check_00
+}
+
+call_check "Betty test on all .c and .h files"

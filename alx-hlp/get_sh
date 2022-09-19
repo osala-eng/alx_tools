@@ -1,0 +1,21 @@
+#!/bin/bash
+
+DIR_NAME=".github/workflows"
+FILE_NAME="main.yml"
+WORK_FILE="local_check"
+
+
+FILE_ADD="https://raw.githubusercontent.com/osala-eng/simple_shell/master/.github/workflows/main.yml"
+
+DEFAULT_BRANCH=`sed -e 's/^.*\///' < .git/refs/remotes/origin/HEAD`
+
+mkdir -p $DIR_NAME
+
+curl -s $FILE_ADD > "${DIR_NAME}/${FILE_NAME}"
+
+sed -i "s/\[ \"master\" \]/\[ \"`sed -e 's/^.*\///' < .git/refs/remotes/origin/HEAD`\" \]/g" ${DIR_NAME}/${FILE_NAME}
+
+echo "CHECK_00" > $WORK_FILE
+
+git add . && git commit -m $DIR_NAME $WORK_FILE $DIR_NAME 
+
