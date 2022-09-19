@@ -37,6 +37,15 @@ run_checker () {
 	done
 }
 
+wild_file () {
+	for i in $1; do
+		if [ -f $i ]; then
+			return 1
+		fi
+	done
+	return 0
+}
+
 echo -e
 echo -e "${GREEN}===================Betty Checks===================${NC}"
 echo -e
@@ -44,18 +53,17 @@ echo -e
 
 
 for d in */; do
-	if ls "${d}*.c" 1> $NULL_OUT; then
+	if [ $((wild_file "${d}*.c")) -ge 1 ]; then
 		./suites/betty "${d}*.c" >> $DATA
 	fi
-	if ls "${d}*.h" 1> $NULL_OUT; then
+	if [ $((wild_file "${d}*.h")) -ge 1 ]; then
 		./suites/betty "${d}*.c" >> $DATA
 	fi
 done
 
 if [ ! -f "$DATA" ]; then
 	echo -e
-	echo -e "${GREEN}Test 0:${NC} Betty linter found no *.c or *.h \
-		files to to check${CR}${UNDONE}" 1>&2
+	echo -e "${GREEN}Test 0:${NC} Betty linter found no *.c or *.h files to to check${CR}${UNDONE}" 1>&2
 	echo -e
 	exit 0
 fi
