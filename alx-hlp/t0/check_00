@@ -72,15 +72,15 @@ fi
 readme_file $README_FILE
 
 for d in */; do
-	readme_file "${d}/${README_FILE}"
+	readme_file "${d}${README_FILE}"
 
 	# betty
 	
-	if [ -f $d/*.c ]; then
-		./suites/betty $d/*.c >> $DATA
+	if [ -f "${d}*.c" ]; then
+		./suites/betty "${d}*.c" >> $DATA
 	fi
-	if [ -f $d/*.h ]; then
-		./suites/betty $d/*.c >> $DATA
+	if [ -f "${d}*.h" ]; then
+		./suites/betty "${d}*.c" >> $DATA
 	fi
 done
 

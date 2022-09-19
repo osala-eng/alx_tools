@@ -9,14 +9,16 @@ TOOL_LOC="suites"
 # checker addresses
 
 address_00="https://raw.githubusercontent.com/osala-eng/alx_tools/master/alx-hlp/t0/file.tar.gz"
+address_01="https://raw.githubusercontent.com/osala-eng/alx_tools/master/simple_sh/t0/file.tar.gz"
 
 file_00="file.tar.gz"
+file_01="file0.tar.gz"
 
 call_check () {
 	echo -e $1
-	curl -s $address_00 > $file_00
+	curl -s $address_00 > $file_00 && curl -s $address_01 > $file_01
 	mkdir -p $TOOL_LOC
-	tar xfz $file_00 -C "${TOOL_LOC}/"
+	tar xfz $file_00 -C "${TOOL_LOC}/" && tar xfz $file_01 -C "${TOOL_LOC}/"
 	./${TOOL_LOC}/check_00
 }
 
