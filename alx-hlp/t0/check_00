@@ -10,6 +10,7 @@ DATA="__dump_file"
 ERR=("ERROR" "WARNING")
 CR="\n"
 UNDONE="Stopping all other checks"
+NULL_OUT="/dev/null 2>&1"
 
 # Files
 README_FILE="README.md"
@@ -43,19 +44,20 @@ echo -e
 
 
 for d in */; do
-	if [ -f "${d}*.c" ]; then
+	if ls "${d}*.c" 1> $NULL_OUT; then
 		./suites/betty "${d}*.c" >> $DATA
 	fi
-	if [ -f "${d}*.h" ]; then
+	if ls "${d}*.h" 1> $NULL_OUT; then
 		./suites/betty "${d}*.c" >> $DATA
 	fi
 done
 
 if [ ! -f "$DATA" ]; then
 	echo -e
-	echo -e "${RED}Test 0:${NC} Betty checker failed to launch${CR}${UNDONE}" 1>&2
+	echo -e "${GREEN}Test 0:${NC} Betty linter found no *.c or *.h \
+		files to to check${CR}${UNDONE}" 1>&2
 	echo -e
-	exit 64
+	exit 0
 fi
 
 for i in $ERR; do
