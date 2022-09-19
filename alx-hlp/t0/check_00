@@ -36,46 +36,13 @@ run_checker () {
 	done
 }
 
-# Readme script
-readme_file() {
-# Readme file present
-if [ ! -f "$1" ]; then
-	echo -e
-	echo -e "Test 0: ${README_ERROR_0}${CR}${UNDONE}" 1>&2
-	echo -e
-	exit 64
-fi
-
-# Readme file is empty
-if [ ! -s "$1" ]; then
-	echo -e
-	echo -e "Test 0: ${README_ERROR_1}${CR}${UNDONE}" 1>&2
-	echo -e
-	exit 64
-fi
-}
-
-# Test 0
 echo -e
-echo -e "===================Test 0==================="
-echo -e
+echo -e "${GREEN}===================Betty Checks===================${NC}"
 echo -e
 
-# Repository is exist
-if [ ! -d "../$REPO_NAME" ]; then
-	echo -e "Test 0: ${REPO_ERROR_0}${CR}${UNDONE}" 1>&2
-	echo -e
-	exit 64
-fi
 
-# Root readme
-readme_file $README_FILE
 
 for d in */; do
-	readme_file "${d}${README_FILE}"
-
-	# betty
-	
 	if [ -f "${d}*.c" ]; then
 		./suites/betty "${d}*.c" >> $DATA
 	fi
@@ -86,7 +53,7 @@ done
 
 if [ ! -f "$DATA" ]; then
 	echo -e
-	echo -e "Test 0: Betty checker failed to launch${CR}${UNDONE}" 1>&2
+	echo -e "${RED}Test 0:${NC} Betty checker failed to launch${CR}${UNDONE}" 1>&2
 	echo -e
 	exit 64
 fi
