@@ -7,7 +7,7 @@
 
 # VARS
 DATA="__dump_file"
-ERR={"ERROR" "WARNING"}
+ERR=("ERROR" "WARNING")
 CR="\n"
 UNDONE="Stopping all other checks"
 
